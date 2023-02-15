@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  dev:
+    container_name: chat_nestjs_api_dev
+    image: nestjs-api-dev:1.0.0
+    build:
+      context: .
+      target: development
+      dockerfile: ./deploy/local/Dockerfile
+    command: npm run start:debug
+    ports:
+      - 3000:3000
+      - 9229:9229
+    networks:
+      - nesjs-network
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: unless-stopped
+  test:
+    container_name: chat_nestjs_api_test
+    image: nestjs-api-test:1.0.0
+    build:
+      context: .
+      target: testing
+      dockerfile: ./deploy/local/Dockerfile
+    command: npm run test
+  prod:
+    container_name: chat_nestjs_api_prod
+    image: nestjs-api-prod:1.0.0
+    build:
+      context: .
+      target: production
+      dockerfile: ./deploy/local/Dockerfile
+    command: npm run start:prod
+    ports:
+      - 3000:3000
+      - 9229:9229
+    networks:
+      - nesjs-network
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: unless-stopped
+
+networks:
+  nesjs-network:
