@@ -1,6 +1,6 @@
-import { Controller, Get } from '@nestjs/common';
-import { HealthService } from './health.service';
-import { ApiResponse } from "@nestjs/swagger";
+import { Controller, Get } from '@nestjs/common'
+import { HealthService } from './health.service'
+import { ApiResponse } from '@nestjs/swagger'
 
 @Controller('health')
 export class HealthController {
@@ -10,9 +10,9 @@ export class HealthController {
   @ApiResponse({
     status: 200,
     description: 'Health check',
-    type: String
+    type: String,
   })
   checkHealth(): string {
-    return this.healthService.checkHealth();
+    return this.healthService.checkHealth()
   }
 }
