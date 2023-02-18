@@ -1,9 +1,9 @@
-interface ValueObjectProps {
+export interface ValueObjectProps {
   [index: string]: any
 }
 
 export abstract class ValueObject<T extends ValueObjectProps> {
-  constructor(protected props: T) {
+  protected constructor(public props: T) {
     this.props = {
       ...props,
     }

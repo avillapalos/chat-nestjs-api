@@ -7,7 +7,7 @@ export interface StringPropsData {
 export abstract class StringValueObject extends ValueObject<StringPropsData> {
   value: string
 
-  protected constructor(props: StringPropsData) {
+  constructor(props: StringPropsData) {
     super(props)
 
     this.value = props.value
