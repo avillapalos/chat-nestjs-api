@@ -17,7 +17,7 @@ export class CreateRoomController {
   @Post()
   @ApiBody({
     schema: {
-      example: { id: '1234', name: 'Room 1' },
+      example: { name: 'Room 1' },
     },
   })
   @ApiResponse({
