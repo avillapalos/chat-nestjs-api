@@ -33,6 +33,10 @@ export class CreateRoomController {
     status: constants.HTTP_STATUS_CREATED,
     description: 'Chat Room created',
   })
+  @ApiResponse({
+    status: constants.HTTP_STATUS_BAD_REQUEST,
+    description: 'Room name missing or invalid',
+  })
   run(@Body('name') name: string): Promise<void> {
     try {
       const createRoomDto = new CreateRoomDto(name)

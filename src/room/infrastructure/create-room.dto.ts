@@ -10,7 +10,7 @@ export class CreateRoomDto {
 
   private validate() {
     if (!this.name) {
-      throw new InvalidArgumentError('name should not be empty')
+      throw new InvalidArgumentError('room name missing or invalid')
     }
   }
 }
