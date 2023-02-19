@@ -10,8 +10,10 @@ import { DbRoom } from './db.room.entity'
 import { DataSource, Repository } from 'typeorm'
 import { Room } from '../domain/room.entity'
 
-const ROOM_REPOSITORY_TOKEN = Symbol('ROOM_REPOSITORY_TOKEN')
-const ROOM_TYPEORM_REPOSITORY_TOKEN = Symbol('ROOM_TYPEORM_REPOSITORY_TOKEN')
+export const ROOM_REPOSITORY_TOKEN = Symbol('ROOM_REPOSITORY_TOKEN')
+export const ROOM_TYPEORM_REPOSITORY_TOKEN = Symbol(
+  'ROOM_TYPEORM_REPOSITORY_TOKEN',
+)
 
 @Module({
   imports: [DatabaseModule],

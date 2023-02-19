@@ -11,6 +11,6 @@ export class CreateRoomUseCase {
   async execute(createRoomDto: CreateRoomDto): Promise<void> {
     const room = Room.create(RoomName.create(createRoomDto.name))
     await this.repository.createRoom(room)
-    // await this.eventBus.publish(room.pullDomainEvents())
+    // TODO publish event 'room-created'
   }
 }

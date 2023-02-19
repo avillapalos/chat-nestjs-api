@@ -20,7 +20,7 @@ export const CREATE_ROOM_USE_CASE_TOKEN = Symbol('CREATE_ROOM_USE_CASE_TOKEN')
 export class CreateRoomController {
   constructor(
     @Inject(CREATE_ROOM_USE_CASE_TOKEN)
-    private readonly createRoomUseCase: CreateRoomUseCase,
+    private createRoomUseCase: CreateRoomUseCase,
   ) {}
 
   @Post()
