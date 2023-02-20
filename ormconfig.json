@@ -6,5 +6,5 @@
   "password": "chat",
   "database": "chat-db",
   "entities": [],
-  "synchronize": true
+  "synchronize": false
 }
