@@ -15,7 +15,7 @@ import { CreateRoomDto } from './create-room.dto'
 export const CREATE_ROOM_USE_CASE_TOKEN = Symbol('CREATE_ROOM_USE_CASE_TOKEN')
 
 @Injectable()
-@ApiTags('chat')
+@ApiTags('room')
 @Controller('room')
 export class CreateRoomController {
   constructor(
@@ -37,10 +37,10 @@ export class CreateRoomController {
     status: constants.HTTP_STATUS_BAD_REQUEST,
     description: 'Room name missing or invalid',
   })
-  run(@Body('name') name: string): Promise<void> {
+  async run(@Body() createRoomDto: CreateRoomDto): Promise<any> {
     try {
-      const createRoomDto = new CreateRoomDto(name)
-      return this.createRoomUseCase.execute(createRoomDto)
+      const newRoom = await this.createRoomUseCase.execute(createRoomDto)
+      return { id: newRoom.id.value }
     } catch (e: any) {
       throw new HttpException(e.message, HttpStatus.BAD_REQUEST)
     }
