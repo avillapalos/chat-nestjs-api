@@ -14,10 +14,8 @@ import { DatabaseModule } from '../../../app/db.module'
 import { User } from '../../../user/domain/user.entity'
 import { USER_TYPEORM_REPOSITORY_TOKEN } from '../../../user/infrastructure/user.module'
 import { DbUser } from '../../../user/infrastructure/db.user.entity'
-import { UserName } from '../../../user/domain/user-name.value-object'
-import { UserPassword } from '../../../user/domain/user-password.value-object'
 
-describe('CreateUserController test', () => {
+describe('AddUserController test', () => {
   let controller: AddUserController
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
@@ -55,29 +53,25 @@ describe('CreateUserController test', () => {
         },
         AddUserUseCase,
       ],
-    })
-      .overrideProvider(AddUserUseCase)
-      .useFactory({
-        factory: () => ({
-          execute: jest
-            .fn()
-            .mockImplementation(() =>
-              User.create(
-                UserName.create('User 1'),
-                UserPassword.create('1234'),
-              ),
-            ),
-        }),
-      })
-      .compile()
+    }).compile()
     controller = moduleFixture.get(AddUserController)
+    controller['addUserUseCase'] = {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      repository: {
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
+        addUser: jest.fn().mockImplementation(() => {}),
+      },
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      execute: jest.fn().mockImplementation(async () => {}),
+    }
   })
   it('run should work successfully', async () => {
     expect(
-      typeof (await controller.run(
+      await controller.run(
         '8c64874a-e427-4522-ac34-bec6606eb38d',
         '671b9cc0-f57c-43e8-9a32-0204c8823e92',
-      )),
-    ).toBeInstanceOf(Promise)
+      ),
+    ).toBeUndefined() // doesn't throw any error
   })
 })

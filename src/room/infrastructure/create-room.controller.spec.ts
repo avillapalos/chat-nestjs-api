@@ -69,7 +69,11 @@ describe('CreateRoomController test', () => {
             async () => await Room.create(RoomName.create('Room 1')),
           ),
       },
-      execute: jest.fn().mockImplementation(async () => await Promise),
+      execute: jest
+        .fn()
+        .mockImplementation(
+          async () => await Room.create(RoomName.create('Room 1')),
+        ),
     }
   })
   it('run should work successfully', () => {
