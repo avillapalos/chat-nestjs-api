@@ -1,6 +1,6 @@
-import { RoomRepository } from '../../domain/room.repository'
-import { Room } from '../../domain/room.entity'
-import { RoomName } from '../../domain/room-name.value-object'
+import { RoomRepository } from '../../core/domain/room.repository'
+import { Room } from '../../core/domain/room.entity'
+import { RoomName } from '../../core/domain/room-name.value-object'
 import { CreateRoomDto } from '../../infrastructure/create-room.dto'
 
 export class CreateRoomUseCase {
@@ -8,9 +8,9 @@ export class CreateRoomUseCase {
     private repository: RoomRepository /* , private eventBus: EventBus */,
   ) {}
 
-  async execute(createRoomDto: CreateRoomDto): Promise<void> {
+  async execute(createRoomDto: CreateRoomDto): Promise<Room> {
     const room = Room.create(RoomName.create(createRoomDto.name))
-    await this.repository.createRoom(room)
+    return await this.repository.createRoom(room)
     // TODO publish event 'room-created'
   }
 }

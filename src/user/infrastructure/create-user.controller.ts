@@ -15,7 +15,7 @@ import { CreateUserDto } from './create-user.dto'
 export const CREATE_USER_USE_CASE_TOKEN = Symbol('CREATE_USER_USE_CASE_TOKEN')
 
 @Injectable()
-@ApiTags('chat')
+@ApiTags('user')
 @Controller('user')
 export class CreateUserController {
   constructor(
@@ -37,12 +37,8 @@ export class CreateUserController {
     status: constants.HTTP_STATUS_BAD_REQUEST,
     description: 'User name missing or invalid',
   })
-  async run(
-    @Body('name') name: string,
-    @Body('password') password: string,
-  ): Promise<any> {
+  async run(@Body() createUserDto: CreateUserDto): Promise<any> {
     try {
-      const createUserDto = new CreateUserDto(name, password)
       const newUser = await this.createUserUseCase.execute(createUserDto)
       return { id: newUser.id.value }
     } catch (e: any) {

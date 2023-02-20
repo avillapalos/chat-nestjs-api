@@ -24,4 +24,13 @@ export const DbUser = new EntitySchema<User>({
       transformer: ValueObjectTransformer(UserPassword),
     },
   },
+  relations: {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    rooms: {
+      type: 'many-to-many',
+      inverseSide: 'users',
+      target: 'Room',
+    },
+  },
 })

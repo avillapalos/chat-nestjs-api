@@ -9,12 +9,15 @@ import {
 } from '../../infrastructure/create-room.controller'
 import { DatabaseModule } from '../../../app/db.module'
 import { DataSource, Repository } from 'typeorm'
-import { Room } from '../../domain/room.entity'
-import { DbRoomRepository } from '../../infrastructure/persistence/db.room.repository'
-import { DbRoom } from '../../infrastructure/db.room.entity'
+import { Room } from '../../core/domain/room.entity'
+import { DbRoomRepository } from '../../core/infrastructure/persistence/db.room.repository'
+import { DbRoom } from '../../core/infrastructure/db.room.entity'
 import { CreateRoomUseCase } from './create-room.use-case'
 import { CreateRoomDto } from '../../infrastructure/create-room.dto'
-import { RoomName } from '../../domain/room-name.value-object'
+import { RoomName } from '../../core/domain/room-name.value-object'
+import { User } from '../../../user/domain/user.entity'
+import { USER_TYPEORM_REPOSITORY_TOKEN } from '../../../user/infrastructure/user.module'
+import { DbUser } from '../../../user/infrastructure/db.user.entity'
 
 describe('CreateRoomUseCase test', () => {
   let useCase: CreateRoomUseCase
@@ -25,14 +28,22 @@ describe('CreateRoomUseCase test', () => {
       providers: [
         {
           provide: ROOM_REPOSITORY_TOKEN,
-          useFactory: (ormRepository: Repository<Room>) =>
-            new DbRoomRepository(ormRepository),
+          useFactory: (
+            roomOrmRepository: Repository<Room>,
+            userOrmRepository: Repository<User>,
+          ) => new DbRoomRepository(roomOrmRepository, userOrmRepository),
           inject: [ROOM_TYPEORM_REPOSITORY_TOKEN],
         },
         {
           provide: ROOM_TYPEORM_REPOSITORY_TOKEN,
           useFactory: (dataSource: DataSource) =>
             dataSource.getRepository(DbRoom),
+          inject: ['POSTGRES_DB'],
+        },
+        {
+          provide: USER_TYPEORM_REPOSITORY_TOKEN,
+          useFactory: (dataSource: DataSource) =>
+            dataSource.getRepository(DbUser),
           inject: ['POSTGRES_DB'],
         },
         {
@@ -45,6 +56,8 @@ describe('CreateRoomUseCase test', () => {
       ],
     }).compile()
     useCase = moduleFixture.get(CreateRoomUseCase)
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     useCase['repository'] = {
       createRoom: jest
         .fn()

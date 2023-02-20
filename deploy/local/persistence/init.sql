@@ -11,7 +11,7 @@ CREATE TABLE 'chat-user' (
     password varchar(255)
 );
 
-CREATE TABLE 'users-rooms' (
-    user_id int,
-    room_id int
+CREATE TABLE 'rooms-users' (
+    room_id varchar(255),
+    user_id varchar(255)
 );

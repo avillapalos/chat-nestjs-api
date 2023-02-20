@@ -15,6 +15,7 @@ import {
   USER_TYPEORM_REPOSITORY_TOKEN,
 } from './user.module'
 import { DatabaseModule } from '../../app/db.module'
+import { CreateUserDto } from './create-user.dto'
 
 describe('CreateUserController test', () => {
   let controller: CreateUserController
@@ -61,6 +62,8 @@ describe('CreateUserController test', () => {
     controller = moduleFixture.get(CreateUserController)
   })
   it('run should work successfully', async () => {
-    expect(typeof (await controller.run('User 1', '1234')).id).toBe('string')
+    expect(
+      typeof (await controller.run(new CreateUserDto('User 1', '1234'))).id,
+    ).toBe('string')
   })
 })
