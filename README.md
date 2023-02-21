@@ -35,9 +35,9 @@ For keeping infrastructure out of domain/application, every dependency is inject
 
     sh local.sh start
 
-**WARNING**: Node and postres containers don't connect well in Mac, due to the following issue:
+**WARNING**: Node and postres containers don't connect well in **Mac**, due to the following issue:
 
-
+    Error: connect ECONNREFUSED 172.20.0.2:5432 at TCPConnectWrap.afterConnect [as oncomplete]
 
 ## Run the tests
 
