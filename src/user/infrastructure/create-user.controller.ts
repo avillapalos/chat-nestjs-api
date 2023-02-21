@@ -26,7 +26,7 @@ export class CreateUserController {
   @Post()
   @ApiBody({
     schema: {
-      example: { name: 'User 1' },
+      example: { name: 'User 1', password: '1234' },
     },
   })
   @ApiResponse({

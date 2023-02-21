@@ -1,0 +1,149 @@
+openapi: 3.0.0
+paths:
+  /health:
+    get:
+      operationId: HealthController_checkHealth
+      parameters: []
+      responses:
+        '200':
+          description: Health check
+          content:
+            application/json:
+              schema:
+                example: Ok!
+      tags:
+        - chat
+  /room:
+    post:
+      operationId: CreateRoomController_run
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              example:
+                name: Room 1
+      responses:
+        '201':
+          description: Chat Room created
+        '400':
+          description: Room name missing or invalid
+      tags:
+        - room
+  /user:
+    post:
+      operationId: CreateUserController_run
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              example:
+                name: User 1
+                password: '1234'
+      responses:
+        '201':
+          description: Chat User created
+        '400':
+          description: User name missing or invalid
+      tags:
+        - user
+  /room/{roomId}/user/{userId}:
+    post:
+      operationId: AddUserController_run
+      parameters:
+        - name: roomId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: userId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '201':
+          description: User added to chat room
+        '400':
+          description: Room or User id missing or invalid
+      tags:
+        - room
+  /room/{roomId}/message:
+    post:
+      operationId: SendMessageController_run
+      parameters:
+        - name: roomId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        description: Sends a message to a chat room
+        content:
+          application/json:
+            schema:
+              example:
+                text: Message 1
+                userId: d2af464f-1069-40e7-a5ea-0b9b04c73121
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+        '204':
+          description: Chat Message sent to chat room
+        '400':
+          description: Message name missing or invalid
+      tags:
+        - room
+    get:
+      operationId: GetListMessageController_run
+      parameters:
+        - name: roomId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: limit
+          required: true
+          in: query
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Chat list fetched successfully
+          content:
+            application/json:
+              schema:
+                example:
+                  - id: 681e84a5-431a-4daf-b156-274d4c9b74b4
+                    text: Message example
+                    created: '2023-02-21T09:31:40.090Z'
+                    user_id: 30bb752f-f513-43cb-86d0-9ec9239fcc23
+                    room_id: 51b09adb-7289-477c-a654-46a946da51a8
+                  - id: 10dba169-8050-4d6b-93ea-adebabbc3573
+                    text: Message example 2
+                    created: '2023-02-21T09:29:38.957Z'
+                    user_id: 30bb752f-f513-43cb-86d0-9ec9239fcc23
+                    room_id: 51b09adb-7289-477c-a654-46a946da51a8
+        '400':
+          description: Data provided missing or invalid
+      tags:
+        - room
+info:
+  title: Chat API
+  description: API for company's chat
+  version: '1.0'
+  contact: {}
+tags:
+  - name: chat
+    description: ''
+servers: []
+components:
+  schemas: {}
