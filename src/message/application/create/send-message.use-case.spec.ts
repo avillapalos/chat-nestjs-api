@@ -15,8 +15,6 @@ import {
   SendMessageController,
 } from '../../infrastructure/send-message.controller'
 import { MessageText } from '../../domain/message-text.value-object'
-import { UserId } from '../../../user/core/domain/user-id.value-object'
-import { RoomId } from '../../../room/core/domain/room-id.value-object'
 
 describe('CreateMessageUseCase test', () => {
   let useCase: SendMessageUseCase
@@ -53,8 +51,8 @@ describe('CreateMessageUseCase test', () => {
         .mockImplementation(() =>
           Message.create(
             MessageText.create('Message 1'),
-            UserId.create(),
-            RoomId.create(),
+            '6d16c97c-222c-41a8-9c5e-82635a511c19',
+            '346418b9-25b2-4881-a03f-b81e19447a23',
           ),
         ),
     }

@@ -15,8 +15,6 @@ import {
   SendMessageController,
 } from './send-message.controller'
 import { MessageText } from '../domain/message-text.value-object'
-import { UserId } from '../../user/core/domain/user-id.value-object'
-import { RoomId } from '../../room/core/domain/room-id.value-object'
 
 describe('SendMessageController test', () => {
   let controller: SendMessageController
@@ -45,28 +43,38 @@ describe('SendMessageController test', () => {
         },
         SendMessageUseCase,
       ],
-    })
-      .overrideProvider(SendMessageUseCase)
-      .useFactory({
-        factory: () => ({
-          execute: jest
-            .fn()
-            .mockImplementation(() =>
-              Message.create(
-                MessageText.create('Message 1'),
-                UserId.create(),
-                RoomId.create(),
-              ),
-            ),
-        }),
-      })
-      .compile()
+    }).compile()
     controller = moduleFixture.get(SendMessageController)
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    controller['sendMessageUseCase'] = {
+      execute: jest
+        .fn()
+        .mockImplementation(() =>
+          Message.create(
+            MessageText.create('Message 1'),
+            '6d16c97c-222c-41a8-9c5e-82635a511c19',
+            '346418b9-25b2-4881-a03f-b81e19447a23',
+          ),
+        ),
+      repository: {
+        createMessage: jest
+          .fn()
+          .mockImplementation(() =>
+            Message.create(
+              MessageText.create('Message 1'),
+              '6d16c97c-222c-41a8-9c5e-82635a511c19',
+              '346418b9-25b2-4881-a03f-b81e19447a23',
+            ),
+          ),
+      },
+    }
   })
   it('run should work successfully', async () => {
     expect(
       typeof (
         await controller.run(
+          '346418b9-25b2-4881-a03f-b81e19447a23',
           new SendMessageDto(
             'Message 1',
             '6d16c97c-222c-41a8-9c5e-82635a511c19',
