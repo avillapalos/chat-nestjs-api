@@ -13,7 +13,7 @@ import {
   GET_LIST_MESSAGE_USE_CASE_TOKEN,
   GetListMessageController,
 } from './get-list-message.controller'
-import { GetListMessageUseCase } from '../application/create/get-list-message.use-case'
+import { GetListMessageUseCase } from '../application/get/get-list-message.use-case'
 
 export const MESSAGE_REPOSITORY_TOKEN = Symbol('MESSAGE_REPOSITORY_TOKEN')
 export const MESSAGE_TYPEORM_REPOSITORY_TOKEN = Symbol(

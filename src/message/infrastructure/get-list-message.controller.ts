@@ -10,7 +10,7 @@ import {
 } from '@nestjs/common'
 import { ApiResponse, ApiTags } from '@nestjs/swagger'
 import { constants } from 'http2'
-import { GetListMessageUseCase } from '../application/create/get-list-message.use-case'
+import { GetListMessageUseCase } from '../application/get/get-list-message.use-case'
 
 export const GET_LIST_MESSAGE_USE_CASE_TOKEN = Symbol(
   'GET_LIST_MESSAGE_USE_CASE_TOKEN',
