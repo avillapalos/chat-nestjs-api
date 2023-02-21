@@ -19,11 +19,6 @@ help()
    exit 1 # Exit script after printing help
 }
 
-postgres()
-{
-  docker-compose -f docker-compose-local.yml up --build postgres
-}
-
 build()
 {
   docker-compose -f docker-compose-local.yml up --build --renew-anon-volumes dev
