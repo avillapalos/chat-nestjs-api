@@ -21,7 +21,7 @@ help()
 
 build()
 {
-  docker-compose -f docker-compose-local.yml up --build --renew-anon-volumes dev
+  docker-compose -f docker-compose-local.yml up --build --detach --renew-anon-volumes dev
 }
 
 start()
