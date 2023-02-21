@@ -11,7 +11,7 @@ export const databaseProviders = [
         username: 'chat',
         password: 'chat',
         database: 'chat-db',
-        entities: [__dirname + '/../**/*.entity{.ts,.js}'],
+        entities: [__dirname + '/../**/db.*.entity{.ts,.js}'],
         synchronize: true,
       })
 

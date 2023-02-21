@@ -7,6 +7,7 @@ help()
    echo "Usage: $0 <option>"
    echo "Example: $0 start"
    echo "Options:"
+   echo -e " - build : Starts the server as daemon building it before"
    echo -e " - start : Starts the server as daemon"
    echo -e " - stop : Stops the server"
    echo -e " - restart : Stops and starts server"
@@ -18,6 +19,16 @@ help()
    exit 1 # Exit script after printing help
 }
 
+postgres()
+{
+  docker-compose -f docker-compose-local.yml up --build postgres
+}
+
+build()
+{
+  docker-compose -f docker-compose-local.yml up --build --renew-anon-volumes dev
+}
+
 start()
 {
   docker-compose -f docker-compose-local.yml up --detach dev
@@ -25,7 +36,7 @@ start()
 
 stop()
 {
-  docker-compose -f docker-compose-local.yml down
+  docker-compose -f docker-compose-local.yml down --volumes
 }
 
 restart()
@@ -53,6 +64,7 @@ shell()
 }
 
 case "$1" in
+  build ) build ;;
   start ) start ;;
   stop ) stop ;;
   restart ) restart ;;

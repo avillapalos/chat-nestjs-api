@@ -20,6 +20,12 @@ export const DbRoom = new EntitySchema<Room>({
     },
   },
   relations: {
+    messages: {
+      type: 'one-to-many',
+      target: 'Message',
+      cascade: true,
+      inverseSide: 'room',
+    },
     users: {
       target: 'User',
       type: 'many-to-many',
@@ -34,7 +40,7 @@ export const DbRoom = new EntitySchema<Room>({
           referencedColumnName: 'id',
         },
       },
-      inverseSide: 'Room',
+      inverseSide: 'rooms',
       cascade: true,
     },
   },
