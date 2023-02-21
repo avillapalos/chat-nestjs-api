@@ -9,6 +9,11 @@ import {
   SendMessageController,
 } from './send-message.controller'
 import { SendMessageUseCase } from '../application/create/send-message.use-case'
+import {
+  GET_LIST_MESSAGE_USE_CASE_TOKEN,
+  GetListMessageController,
+} from './get-list-message.controller'
+import { GetListMessageUseCase } from '../application/create/get-list-message.use-case'
 
 export const MESSAGE_REPOSITORY_TOKEN = Symbol('MESSAGE_REPOSITORY_TOKEN')
 export const MESSAGE_TYPEORM_REPOSITORY_TOKEN = Symbol(
@@ -17,7 +22,7 @@ export const MESSAGE_TYPEORM_REPOSITORY_TOKEN = Symbol(
 
 @Module({
   imports: [DatabaseModule],
-  controllers: [SendMessageController],
+  controllers: [SendMessageController, GetListMessageController],
   providers: [
     {
       provide: MESSAGE_REPOSITORY_TOKEN,
@@ -35,6 +40,12 @@ export const MESSAGE_TYPEORM_REPOSITORY_TOKEN = Symbol(
       provide: SEND_MESSAGE_USE_CASE_TOKEN,
       useFactory: (repository: DbMessageRepository) =>
         new SendMessageUseCase(repository),
+      inject: [MESSAGE_REPOSITORY_TOKEN],
+    },
+    {
+      provide: GET_LIST_MESSAGE_USE_CASE_TOKEN,
+      useFactory: (repository: DbMessageRepository) =>
+        new GetListMessageUseCase(repository),
       inject: [MESSAGE_REPOSITORY_TOKEN],
     },
     SendMessageUseCase,

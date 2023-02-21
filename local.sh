@@ -26,7 +26,7 @@ build()
 
 start()
 {
-  docker-compose -f docker-compose-local.yml up --detach dev
+  docker-compose -f docker-compose-local.yml up dev
 }
 
 stop()
