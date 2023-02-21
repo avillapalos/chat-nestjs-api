@@ -65,8 +65,8 @@ export class GetListMessageController {
           id: message.id.value,
           text: message.text.value,
           created: message.created.value,
-          user_id: message.userId.id.value,
-          room_id: message.roomId.id.value,
+          user_id: message.userId?.id.value,
+          room_id: message.roomId?.id.value,
         }
       })
     } catch (e: any) {

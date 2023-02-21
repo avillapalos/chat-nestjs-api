@@ -13,7 +13,7 @@ export class DbMessageRepository implements MessageRepository {
       .leftJoinAndSelect('chat-message.userId', 'chat-user')
       .leftJoinAndSelect('chat-message.roomId', 'chat-room')
       .where('room_id =:roomId', { roomId })
-      .limit(limit)
+      .limit(limit ? limit : 10)
       .orderBy('created', 'DESC')
       .getMany()
   }
