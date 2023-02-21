@@ -55,7 +55,6 @@ PENDING IMPROVEMENTS:
 - Authorization: here, we could have 2 roles: ADMIN and USER.
   - ADMIN for creating Rooms and Users.
   - USER for add theirshelves to a chat room, or to send a message to a room.
-- Fix many to many issue, as currently is not possible to save related user and room at endpoint `/POST /room/:roomId/user/:userId`
 - Add pagination to GET List Messages endpoint, and also Criteria pattern for filtering
 
 # Endpoints
@@ -104,8 +103,6 @@ PENDING IMPROVEMENTS:
     }
 
 ## Add a User to a Chat Room
-
-Note: due to an issue this endpoint doesn't persist data to database
 
 ### Request
 
