@@ -35,6 +35,10 @@ For keeping infrastructure out of domain/application, every dependency is inject
 
     sh local.sh start
 
+**WARNING**: Node and postres containers don't connect well in Mac, due to the following issue:
+
+
+
 ## Run the tests
 
     sh local.sh test
