@@ -25,8 +25,12 @@ export const DbUser = new EntitySchema<User>({
     },
   },
   relations: {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
+    messages: {
+      type: 'one-to-many',
+      target: 'Message',
+      cascade: true,
+      inverseSide: 'user',
+    },
     rooms: {
       type: 'many-to-many',
       inverseSide: 'users',

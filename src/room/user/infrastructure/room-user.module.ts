@@ -9,15 +9,21 @@ import { DbRoomRepository } from '../../core/infrastructure/persistence/db.room.
 import { DataSource, Repository } from 'typeorm'
 import { Room } from '../../core/domain/room.entity'
 import { DbRoom } from '../../core/infrastructure/db.room.entity'
-import { ROOM_TYPEORM_REPOSITORY_TOKEN } from '../../infrastructure/room.module'
+import {
+  ROOM_TYPEORM_REPOSITORY_TOKEN,
+  RoomModule,
+} from '../../infrastructure/room.module'
 import { User } from '../../../user/domain/user.entity'
-import { USER_TYPEORM_REPOSITORY_TOKEN } from '../../../user/infrastructure/user.module'
+import {
+  USER_TYPEORM_REPOSITORY_TOKEN,
+  UserModule,
+} from '../../../user/infrastructure/user.module'
 import { DbUser } from '../../../user/infrastructure/db.user.entity'
 
 export const ROOM_USER_REPOSITORY_TOKEN = Symbol('ROOM_USER_REPOSITORY_TOKEN')
 
 @Module({
-  imports: [DatabaseModule],
+  imports: [DatabaseModule, RoomModule, UserModule],
   controllers: [AddUserController],
   providers: [
     {
