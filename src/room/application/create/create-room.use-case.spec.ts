@@ -28,22 +28,14 @@ describe('CreateRoomUseCase test', () => {
       providers: [
         {
           provide: ROOM_REPOSITORY_TOKEN,
-          useFactory: (
-            roomOrmRepository: Repository<Room>,
-            userOrmRepository: Repository<User>,
-          ) => new DbRoomRepository(roomOrmRepository, userOrmRepository),
+          useFactory: (roomOrmRepository: Repository<Room>) =>
+            new DbRoomRepository(roomOrmRepository),
           inject: [ROOM_TYPEORM_REPOSITORY_TOKEN],
         },
         {
           provide: ROOM_TYPEORM_REPOSITORY_TOKEN,
           useFactory: (dataSource: DataSource) =>
             dataSource.getRepository(DbRoom),
-          inject: ['POSTGRES_DB'],
-        },
-        {
-          provide: USER_TYPEORM_REPOSITORY_TOKEN,
-          useFactory: (dataSource: DataSource) =>
-            dataSource.getRepository(DbUser),
           inject: ['POSTGRES_DB'],
         },
         {

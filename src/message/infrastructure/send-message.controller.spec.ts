@@ -67,6 +67,15 @@ describe('SendMessageController test', () => {
               '346418b9-25b2-4881-a03f-b81e19447a23',
             ),
           ),
+        getListMessage: jest
+          .fn()
+          .mockImplementation(() => [
+            Message.create(
+              MessageText.create('Message 1'),
+              '6d16c97c-222c-41a8-9c5e-82635a511c19',
+              '346418b9-25b2-4881-a03f-b81e19447a23',
+            ),
+          ]),
       },
     }
   })
