@@ -26,7 +26,7 @@ export class SendMessageController {
 
   @Post(':roomId/message')
   @ApiBody({
-    description: 'Sends a massage to a chat room',
+    description: 'Sends a message to a chat room',
     schema: {
       example: {
         text: 'Message 1',
