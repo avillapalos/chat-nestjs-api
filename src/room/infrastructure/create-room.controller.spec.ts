@@ -15,9 +15,6 @@ import { DbRoom } from '../core/infrastructure/db.room.entity'
 import { CreateRoomUseCase } from '../application/create/create-room.use-case'
 import { RoomName } from '../core/domain/room-name.value-object'
 import { CreateRoomDto } from './create-room.dto'
-import { USER_TYPEORM_REPOSITORY_TOKEN } from '../../user/infrastructure/user.module'
-import { User } from '../../user/domain/user.entity'
-import { DbUser } from '../../user/infrastructure/db.user.entity'
 
 describe('CreateRoomController test', () => {
   let controller: CreateRoomController

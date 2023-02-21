@@ -11,9 +11,6 @@ import { DbRoomRepository } from '../../core/infrastructure/persistence/db.room.
 import { ROOM_TYPEORM_REPOSITORY_TOKEN } from '../../infrastructure/room.module'
 import { DbRoom } from '../../core/infrastructure/db.room.entity'
 import { DatabaseModule } from '../../../app/db.module'
-import { User } from '../../../user/domain/user.entity'
-import { USER_TYPEORM_REPOSITORY_TOKEN } from '../../../user/infrastructure/user.module'
-import { DbUser } from '../../../user/infrastructure/db.user.entity'
 
 describe('AddUserController test', () => {
   let controller: AddUserController
